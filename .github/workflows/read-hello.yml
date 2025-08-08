@@ -1,0 +1,21 @@
+name: Read hello.txt on push to main
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  read-hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Read and print hello.txt
+        run: |
+          if [ -f hello.txt ]; then
+            echo 'Contents of hello.txt:'
+            cat hello.txt
+          else
+            echo 'hello.txt not found'
+            exit 1
+          fi
